@@ -11,7 +11,7 @@ function Toolbox() {
   const showBrushToolOption =
     activeMenuItem === MENU_ITEMS.PENCIL ||
     activeMenuItem === MENU_ITEMS.ERASER;
-  const {color, size} = useSelector((state) => state.tool[activeMenuItem])
+  const { color, size } = useSelector((state) => state.tool[activeMenuItem]);
 
   const updateBrushSize = (e) => {
     // console.log(e.target.value)
@@ -35,9 +35,11 @@ function Toolbox() {
                 return (
                   <div
                     key={index}
-                    className={cx(styles.colorBox,{[styles.active] : color === COLORS[key]} )}
+                    className={cx(styles.colorBox, {
+                      [styles.active]: color === COLORS[key],
+                    })}
                     style={{ background: COLORS[key] }}
-                    onClick={()=>updateColor(COLORS[key])}
+                    onClick={() => updateColor(COLORS[key])}
                   />
                 );
             })}
@@ -55,6 +57,7 @@ function Toolbox() {
               min={1}
               max={10}
               step={1}
+              value={size}
               onChange={updateBrushSize}
             />
           </div>
