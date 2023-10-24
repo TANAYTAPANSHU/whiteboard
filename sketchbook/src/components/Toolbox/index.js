@@ -3,6 +3,8 @@ import { COLORS, MENU_ITEMS } from "../../constants";
 import cx from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { changeBrushSize, changeColor } from "../slice/toolboxSlice";
+import socket from "../../socket";
+import { useEffect } from "react";
 
 function Toolbox() {
   const activeMenuItem = useSelector((state) => state.menu.activeMenuItem);
@@ -13,13 +15,17 @@ function Toolbox() {
     activeMenuItem === MENU_ITEMS.ERASER;
   const { color, size } = useSelector((state) => state.tool[activeMenuItem]);
 
+
   const updateBrushSize = (e) => {
     // console.log(e.target.value)
     dispatch(changeBrushSize({ item: activeMenuItem, size: e.target.value }));
+    console.log("we are emiiting")
+    socket.emit('changeConfig',{color, size: e.target.value})
   };
 
   const updateColor = (newColor) => {
     dispatch(changeColor({ item: activeMenuItem, color: newColor }));
+    socket.emit('changeConfig',{color : newColor, size})
   };
 
   return (
@@ -55,7 +61,7 @@ function Toolbox() {
             <input
               type="range"
               min={1}
-              max={10}
+              max={30}
               step={1}
               value={size}
               onChange={updateBrushSize}

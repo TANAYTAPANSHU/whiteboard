@@ -2,11 +2,12 @@ import { MENU_ITEMS } from "@/constants";
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionItemclick } from "../slice/menuSlice";
+import socket from "../../socket";
 
 function Board() {
   const canvasRef = useRef(null);
   const dispatch = useDispatch();
-  const drawHistory = useRef([]);;
+  const drawHistory = useRef([]);
   const historyPointer = useRef(0);
   //to check whether drawing can be done
   const shouldDrawRef = useRef(null);
@@ -16,6 +17,11 @@ function Board() {
   //mounting the component
   useEffect(() => {
     const canvas = canvasRef?.current;
+
+    //connecting with web socket
+    socket.on("connect", () => {
+ 
+    });
     if (canvas.getContext) {
       const context = canvas.getContext("2d");
       canvas.width = window.innerWidth;
@@ -33,22 +39,41 @@ function Board() {
 
       const handleMouseDown = (e) => {
         shouldDrawRef.current = true;
-
         beginPath(e.clientX, e.clientY);
+        socket.emit("beginPath", { x: e.clientX, y: e.clientY });
       };
 
       const handleMouseMove = (e) => {
         if (!shouldDrawRef.current) return;
         drawLine(e.clientX, e.clientY);
+        socket.emit("drawLine", { x: e.clientX, y: e.clientY });
       };
 
       const handleMouseUp = (e) => {
         shouldDrawRef.current = false;
-        const imageData = context.getImageData(0,0, canvas.width,canvas.height)
+        //taking imageData for undo and redo
+        const imageData = context.getImageData(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+        //pushing the data to the drawHistory ref array , which is used for redo and undo
         drawHistory.current.push(imageData);
-        console.log("This is the draw history ", drawHistory.current)
-        historyPointer.current = drawHistory.current.length -1;
+        //history pointer pointing to the latest element 
+        historyPointer.current = drawHistory.current.length - 1;
       };
+
+      const handleBeginPath = (path) =>{
+        beginPath(path.x,path.y)
+      }
+
+      const handleDrawLine = (path) =>{
+        drawLine(path.x,path.y)
+      }
+    
+      socket.on('beginPath',handleBeginPath)
+      socket.on('drawLine',handleDrawLine)
 
       //added event listener for movements of mouse on canva
       canvas.addEventListener("mousedown", handleMouseDown);
@@ -78,52 +103,47 @@ function Board() {
       anchor.href = URL;
       anchor.download = "sketch.jpg";
       anchor.click();
-    }
-    else if (actionMenuItem === MENU_ITEMS.UNDO){
-      if(drawHistory.current[historyPointer.current -1])
-      {
-        const imageData = drawHistory.current[historyPointer.current -1]
-        context.putImageData(imageData, 0, 0)
-        if(historyPointer.current > 0) 
-        {
-         historyPointer.current -=1;
+    } else if (actionMenuItem === MENU_ITEMS.UNDO) {
+      if (drawHistory.current[historyPointer.current - 1]) {
+        const imageData = drawHistory.current[historyPointer.current - 1];
+        context.putImageData(imageData, 0, 0);
+        if (historyPointer.current > 0) {
+          historyPointer.current -= 1;
         }
       }
-    
-    }
-    else if(actionMenuItem === MENU_ITEMS.REDO){
-      if(drawHistory.current[historyPointer.current +1])
-      {
-        const imageData = drawHistory.current[historyPointer.current +1]
-        context.putImageData(imageData, 0, 0)
-  
-         historyPointer.current +=1;
-      
-      }
+    } else if (actionMenuItem === MENU_ITEMS.REDO) {
+      if (drawHistory.current[historyPointer.current + 1]) {
+        const imageData = drawHistory.current[historyPointer.current + 1];
+        context.putImageData(imageData, 0, 0);
 
+        historyPointer.current += 1;
+      }
     }
-        dispatch(actionItemclick(null));
+    dispatch(actionItemclick(null));
   }, [actionMenuItem]);
 
   //effect will be called once color and size is changed apart from initial render
   useEffect(() => {
-    //current propery of canvasRef
-    const canvas = canvasRef?.current;
+    if (!canvasRef.current) return
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d')
 
-    //condition to check whether browser supports HTML5 canvas
-    if (canvas.getContext) {
-      //Obtaining 2d rendering context of canvas
-      const context = canvas.getContext("2d");
-
-      //function for changing style and linewidth
-      const changeConfig = () => {
-        context.strokeStyle = color;
-        context.lineWidth = size;
-      };
-
-      changeConfig();
+    const changeConfig = (color, size) => {
+        context.strokeStyle = color
+        context.lineWidth = size
     }
-  }, [color, size]);
+
+    const handleChangeConfig = (config) => {
+        console.log("config", config)
+        changeConfig(config.color, config.size)
+    }
+    changeConfig(color, size)
+    socket.on('changeConfig', handleChangeConfig)
+
+    return () => {
+        socket.off('changeConfig', handleChangeConfig)
+    }
+}, [color, size])
 
   return <canvas ref={canvasRef}></canvas>;
 }

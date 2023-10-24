@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <div className='flex flex-col  w-screen bg-[#e9cfcf] '>
+    <div className='flex flex-col  w-screen'>
     <Menu />
     <Toolbox />
     <Board />
