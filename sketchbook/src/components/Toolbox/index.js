@@ -19,7 +19,6 @@ function Toolbox() {
   const updateBrushSize = (e) => {
     // console.log(e.target.value)
     dispatch(changeBrushSize({ item: activeMenuItem, size: e.target.value }));
-    console.log("we are emiiting")
     socket.emit('changeConfig',{color, size: e.target.value})
   };
 

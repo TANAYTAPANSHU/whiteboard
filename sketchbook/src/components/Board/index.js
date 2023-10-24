@@ -134,7 +134,6 @@ function Board() {
     }
 
     const handleChangeConfig = (config) => {
-        console.log("config", config)
         changeConfig(config.color, config.size)
     }
     changeConfig(color, size)
