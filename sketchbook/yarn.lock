@@ -77,6 +77,13 @@
   dependencies:
     "tslib" "^2.4.0"
 
+"@tailwindcss/nesting@^0.0.0-insiders.565cd3e":
+  "integrity" "sha512-WhHoFBx19TnH/c+xLwT/sxei6+4RpdfiyG3MYXfmLaMsADmVqBkF7B6lDalgZD9YdM459MF7DtxVbWkOrV7IaQ=="
+  "resolved" "https://registry.npmjs.org/@tailwindcss/nesting/-/nesting-0.0.0-insiders.565cd3e.tgz"
+  "version" "0.0.0-insiders.565cd3e"
+  dependencies:
+    "postcss-nested" "^5.0.5"
+
 "@types/cookie@^0.4.1":
   "integrity" "sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q=="
   "resolved" "https://registry.npmjs.org/@types/cookie/-/cookie-0.4.1.tgz"
@@ -370,6 +377,13 @@
     "read-cache" "^1.0.0"
     "resolve" "^1.1.7"
 
+"postcss-nested@^5.0.5":
+  "integrity" "sha512-rKqm2Fk0KbA8Vt3AdGN0FB9OBOMDVajMG6ZCf/GoHgdxUJ4sBFp0A/uMIRm+MJUdo33YXEtjqIz8u7DAp8B7DA=="
+  "resolved" "https://registry.npmjs.org/postcss-nested/-/postcss-nested-5.0.6.tgz"
+  "version" "5.0.6"
+  dependencies:
+    "postcss-selector-parser" "^6.0.6"
+
 "postcss-nesting@^12.0.1":
   "integrity" "sha512-6LCqCWP9pqwXw/njMvNK0hGY44Fxc4B2EsGbn6xDcxbNRzP8GYoxT7yabVVMLrX3quqOJ9hg2jYMsnkedOf8pA=="
   "resolved" "https://registry.npmjs.org/postcss-nesting/-/postcss-nesting-12.0.1.tgz"
@@ -378,7 +392,7 @@
     "@csstools/selector-specificity" "^3.0.0"
     "postcss-selector-parser" "^6.0.13"
 
-"postcss-selector-parser@^6.0.13":
+"postcss-selector-parser@^6.0.13", "postcss-selector-parser@^6.0.6":
   "integrity" "sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ=="
   "resolved" "https://registry.npmjs.org/postcss-selector-parser/-/postcss-selector-parser-6.0.13.tgz"
   "version" "6.0.13"
@@ -391,7 +405,7 @@
   "resolved" "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz"
   "version" "4.2.0"
 
-"postcss@^8.0.0", "postcss@^8.4", "postcss@8.4.31":
+"postcss@^8.0.0", "postcss@^8.2.14", "postcss@^8.2.15", "postcss@^8.4", "postcss@8.4.31":
   "integrity" "sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ=="
   "resolved" "https://registry.npmjs.org/postcss/-/postcss-8.4.31.tgz"
   "version" "8.4.31"
