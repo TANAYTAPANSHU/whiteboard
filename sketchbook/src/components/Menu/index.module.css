@@ -8,9 +8,9 @@
     .iconWrapper {
         @apply cursor-pointer flex justify-center items-center gap-2 h-5 w-5 md:h-10 md:w-10 rounded-md;
 
-        &:hover, &.active {
+        /* &:hover, &.active {
             background-color: theme('colors.text2');
-        }
+        } */
         .icon {
             color: theme('colors.text1');
             font-size: 20px;
