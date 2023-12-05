@@ -144,7 +144,11 @@ function Board() {
     }
 }, [color, size])
 
-  return <canvas ref={canvasRef}></canvas>;
+  return(
+    <div style={{background:""}}>
+    <canvas ref={canvasRef}></canvas>
+    </div>
+  )
 }
 
 export default Board;
