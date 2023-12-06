@@ -26,6 +26,7 @@
     "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
+    "eslint": "^8.55.0",
     "postcss-nesting": "^12.0.1"
   }
 }
