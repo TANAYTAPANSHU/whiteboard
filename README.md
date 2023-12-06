@@ -4,6 +4,10 @@ Whiteboard is a web application built with Next.js and Redux Toolkit that allows
 
 ## Getting Started
 
+These instructions will help you set up a local development environment and run the project on your machine. <a href="https://github.com/TANAYTAPANSHU/whiteboard-Server"> Click here </a> to check the server code
+
+## Project Screnshots
+
 These instructions will help you set up a local development environment and run the project on your machine.
 
 ### Prerequisites
@@ -55,6 +59,10 @@ Users can undo and redo their actions to correct or replay their sketches easily
 ### Download Sketch
 
 Save your masterpiece by downloading the sketch as an image file.
+
+### Color and Brush Size
+
+Select different colors and brush sizes to customize your drawing experience.
 
 ### Color and Brush Size
 
