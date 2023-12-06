@@ -7,8 +7,8 @@ Whiteboard is a web application built with Next.js and Redux Toolkit that allows
 These instructions will help you set up a local development environment and run the project on your machine. <a href="https://github.com/TANAYTAPANSHU/whiteboard-Server"> Click here </a> to check the server code
 
 ## Project Screnshots
+![Main Page](https://firebasestorage.googleapis.com/v0/b/instagram-clone-71729.appspot.com/o/images%2FScreenshot%202023-12-06%20at%2011.22.42%20PM.png?alt=media&token=2ef39ec8-0186-45c2-892a-5b0843c702ed)
 
-These instructions will help you set up a local development environment and run the project on your machine.
 
 ### Prerequisites
 
